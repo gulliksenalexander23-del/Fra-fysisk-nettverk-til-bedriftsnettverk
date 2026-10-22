@@ -26,4 +26,9 @@ Port 2 til switch til port 1 ruteren
 Port 3 til switch til serveren 
 Får internett fra vegg til ruteren på internett porten 
 
+Steg 2 – adresseplan og gateway
+Nett: 192.168.1.1
+R1: 192.168.1.1
+SERVER01: 192.168.1.10
+CLIENT01: 192.168.1.100
 
