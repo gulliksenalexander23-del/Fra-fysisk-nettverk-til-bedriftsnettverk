@@ -32,3 +32,10 @@ R1: 192.168.1.1
 SERVER01: 192.168.1.10
 CLIENT01: 192.168.1.100
 
+Steg 3 – grunnleggende testing
+
+Ping fra klienten til serveren
+<img width="829" height="373" alt="image" src="https://github.com/user-attachments/assets/2eff0638-ac9c-44c0-a02d-985b10d9ddae" />
+
+Ping fra serveren til klienten
+<img width="845" height="384" alt="image" src="https://github.com/user-attachments/assets/19a79bf1-93e5-4b3c-89c2-3fb5a9940a26" />
