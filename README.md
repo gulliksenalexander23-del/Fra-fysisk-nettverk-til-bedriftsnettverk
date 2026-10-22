@@ -22,5 +22,8 @@ Laget en ny fells mappe for dette projektet på server-pc med å lag ny mappe me
 
 Med denne løsningen blir dette en «quick fix» for kunne sette opp mappen lettere som en snarvei. Det er mulig å sette begrensinger sånn det er bare users på serveren som har tilgang til spesifikke mapper, mens admin har styring hvem som har tilgang til hva. Ved denne «quick fix» løsningen kan det være fare for om klient pc-en blir utsatt for virus. kan det forutsake fri tilgang til å kryptere og slette alt på serveren gjennom den delte mappen. Jeg skal kommer mer inn på dette med active directory i neste oppgave. 
 
+Port 2 til switch til port 1 ruteren
+Port 3 til switch til serveren 
+Får internett fra vegg til ruteren på internett porten 
 
 
