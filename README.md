@@ -39,3 +39,10 @@ Ping fra klienten til serveren
 
 Ping fra serveren til klienten
 <img width="845" height="384" alt="image" src="https://github.com/user-attachments/assets/19a79bf1-93e5-4b3c-89c2-3fb5a9940a26" />
+
+Steg 4 – DHCP til klienten
+Først Setter vi CLIENT01 til automatisk IP-adresse på ethernet.
+Så skriver vi inn ipconfig /release for å fjerne nåværende IP-adress som den har fra DHCP-serveren. Deretter kjører vi ipconfig /renew for å tvinge maskinen til å be om ny IP-adresse fra DHCP-serveren på det nettet den nå faktisk er plugget i. Med ipconfig /all er det bare vanlig ipconfig bare mer informasjon. 
+I mitt tilfelle blir ikke den endret fordi den tar den nærmeste IP-adressen som er tilgjengelig. Siden den er allerede satt 192.168.1.100 vil den bare ta den IP-adressen siden det er bare en person på serveren. 
+<img width="789" height="169" alt="image" src="https://github.com/user-attachments/assets/84665f46-48e8-4972-b477-42b8b87f7b6f" />
+<img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/5275e1f2-a2fd-4fca-bdfc-cc1c28f1d873" />
