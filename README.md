@@ -51,3 +51,17 @@ Laget en ny fells mappe for dette projektet på server-pc med å lag ny mappe me
 <img width="250" height="277" alt="image" src="https://github.com/user-attachments/assets/f98c54cf-4baa-417a-9f30-29c3c6520c58" />
 
 Med denne løsningen blir dette en «quick fix» for kunne sette opp mappen lettere som en snarvei. Det er mulig å sette begrensinger sånn det er bare users på serveren som har tilgang til spesifikke mapper, mens admin har styring hvem som har tilgang til hva. Ved denne «quick fix» løsningen kan det være fare for om klient pc-en blir utsatt for virus. kan det forutsake fri tilgang til å kryptere og slette alt på serveren gjennom den delte mappen.
+# Steg 6 – porter og Nmap
+Port : 443 State : open Service : https
+
+Port : 445 State : open Service : Microsoft-ds
+
+<img width="430" height="373" alt="image" src="https://github.com/user-attachments/assets/b67da8dc-73fa-45b4-a862-7fff55c4a73a" /> <img width="427" height="374" alt="image" src="https://github.com/user-attachments/assets/82c4c761-2b70-4851-ad74-e919f4f57d2f" /> <img width="432" height="314" alt="image" src="https://github.com/user-attachments/assets/e9f4a362-e40f-43cc-89e0-f87ddaf23890" />
+
+en port (State: open) er åpen betyr at den kjører en tjeneste eller et program på serveren som aktivt lytter på denne porten, og som er klar til å motta tilkoblinger fra andre enheter på nettverket. Om porten hadde været (State: closed) så ville port vært lukket, som er at det er ingen tjeneste som lytter der og trafikken blir avvist. 
+
+
+
+
+
+
