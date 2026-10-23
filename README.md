@@ -1,4 +1,6 @@
 # Fra-fysisk-nettverk-til-bedriftsnettverk
+# Kravspesifikasjon
+
 <img width="595" height="578" alt="image" src="https://github.com/user-attachments/assets/72bd9121-f7f5-4c93-bdaf-5cc6df078063" />
 
 Endret ipv4 fra 198.168.1.11 til 198.168.0.11 på klient pc-en for å kobling til ruten 
@@ -19,13 +21,13 @@ Port 2 til switch til port 1 ruteren
 Port 3 til switch til serveren 
 Får internett fra vegg til ruteren på internett porten 
 
-Steg 2 – adresseplan og gateway
+# Steg 2 – adresseplan og gateway
 Nett: 192.168.1.1
 R1: 192.168.1.1
 SERVER01: 192.168.1.10
 CLIENT01: 192.168.1.100
 
-Steg 3 – grunnleggende testing
+# Steg 3 – grunnleggende testing
 
 Ping fra klienten til serveren
 <img width="829" height="373" alt="image" src="https://github.com/user-attachments/assets/2eff0638-ac9c-44c0-a02d-985b10d9ddae" />
@@ -33,14 +35,14 @@ Ping fra klienten til serveren
 Ping fra serveren til klienten
 <img width="845" height="384" alt="image" src="https://github.com/user-attachments/assets/19a79bf1-93e5-4b3c-89c2-3fb5a9940a26" />
 
-Steg 4 – DHCP til klienten
+# Steg 4 – DHCP til klienten
 Først Setter vi CLIENT01 til automatisk IP-adresse på ethernet.
 Så skriver vi inn ipconfig /release for å fjerne nåværende IP-adress som den har fra DHCP-serveren. Deretter kjører vi ipconfig /renew for å tvinge maskinen til å be om ny IP-adresse fra DHCP-serveren på det nettet den nå faktisk er plugget i. Med ipconfig /all er det bare vanlig ipconfig bare mer informasjon. 
 I mitt tilfelle blir ikke den endret fordi den tar den nærmeste IP-adressen som er tilgjengelig. Siden den er allerede satt 192.168.1.100 vil den bare ta den IP-adressen siden det er bare en person på serveren. 
 <img width="789" height="169" alt="image" src="https://github.com/user-attachments/assets/84665f46-48e8-4972-b477-42b8b87f7b6f" />
 <img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/5275e1f2-a2fd-4fca-bdfc-cc1c28f1d873" /> 
 
-Steg 5 – bruk SERVER01 som server
+# Steg 5 – bruk SERVER01 som server
 
 Laget en ny fells mappe for dette projektet på server-pc med å lag ny mappe med navn. Så inn på advanced shering og La til alle med full kontroll. Legg til nettverksplassering i filutforsker, og skriver derved navnet til serveren og logger på admin for å godkjenne mappen. Deretter åpner man den nye fells mappen på klient-pc for å kunne dele en ny mappe med sever-pc-en og klient-pc-en.
 
