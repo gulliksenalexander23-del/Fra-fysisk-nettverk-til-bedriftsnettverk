@@ -14,13 +14,6 @@ Hvor ping har feilet fra fra sever-pc til klient-pc og hvor ping har funket ette
 
 <img width="516" height="447" alt="image" src="https://github.com/user-attachments/assets/6881fd7b-c554-4062-bff7-2ecff738b240" />
 
-Laget en ny fells mappe for dette projektet på server-pc med å lag ny mappe med navn. Så inn på advanced shering og La til alle med full kontroll. Legg til nettverksplassering i filutforsker, og skriver derved navnet til serveren og logger på admin for å godkjenne mappen. Deretter åpner man den nye fells mappen på klient-pc for å kunne dele en ny mappe med sever-pc-en og klient-pc-en.
-
-<img width="240" height="312" alt="image" src="https://github.com/user-attachments/assets/48e2327a-9fda-44a7-90ca-9c83940e2c4d" /> <img width="237" height="312" alt="image" src="https://github.com/user-attachments/assets/0c6dfdaa-1bb5-424a-aa8a-2ca1f76e8602" /> <img width="251" height="313" alt="image" src="https://github.com/user-attachments/assets/f7330831-eaeb-4338-855a-3e356d92cf04" /> <img width="315" height="90" alt="image" src="https://github.com/user-attachments/assets/11a6840d-da75-4646-bb89-699b8c9d3c39" />
-
-<img width="250" height="277" alt="image" src="https://github.com/user-attachments/assets/f98c54cf-4baa-417a-9f30-29c3c6520c58" />
-
-Med denne løsningen blir dette en «quick fix» for kunne sette opp mappen lettere som en snarvei. Det er mulig å sette begrensinger sånn det er bare users på serveren som har tilgang til spesifikke mapper, mens admin har styring hvem som har tilgang til hva. Ved denne «quick fix» løsningen kan det være fare for om klient pc-en blir utsatt for virus. kan det forutsake fri tilgang til å kryptere og slette alt på serveren gjennom den delte mappen. Jeg skal kommer mer inn på dette med active directory i neste oppgave. 
 
 Port 2 til switch til port 1 ruteren
 Port 3 til switch til serveren 
@@ -45,4 +38,14 @@ Først Setter vi CLIENT01 til automatisk IP-adresse på ethernet.
 Så skriver vi inn ipconfig /release for å fjerne nåværende IP-adress som den har fra DHCP-serveren. Deretter kjører vi ipconfig /renew for å tvinge maskinen til å be om ny IP-adresse fra DHCP-serveren på det nettet den nå faktisk er plugget i. Med ipconfig /all er det bare vanlig ipconfig bare mer informasjon. 
 I mitt tilfelle blir ikke den endret fordi den tar den nærmeste IP-adressen som er tilgjengelig. Siden den er allerede satt 192.168.1.100 vil den bare ta den IP-adressen siden det er bare en person på serveren. 
 <img width="789" height="169" alt="image" src="https://github.com/user-attachments/assets/84665f46-48e8-4972-b477-42b8b87f7b6f" />
-<img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/5275e1f2-a2fd-4fca-bdfc-cc1c28f1d873" />
+<img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/5275e1f2-a2fd-4fca-bdfc-cc1c28f1d873" /> 
+
+Steg 5 – bruk SERVER01 som server
+
+Laget en ny fells mappe for dette projektet på server-pc med å lag ny mappe med navn. Så inn på advanced shering og La til alle med full kontroll. Legg til nettverksplassering i filutforsker, og skriver derved navnet til serveren og logger på admin for å godkjenne mappen. Deretter åpner man den nye fells mappen på klient-pc for å kunne dele en ny mappe med sever-pc-en og klient-pc-en.
+
+<img width="240" height="312" alt="image" src="https://github.com/user-attachments/assets/48e2327a-9fda-44a7-90ca-9c83940e2c4d" /> <img width="237" height="312" alt="image" src="https://github.com/user-attachments/assets/0c6dfdaa-1bb5-424a-aa8a-2ca1f76e8602" /> <img width="251" height="313" alt="image" src="https://github.com/user-attachments/assets/f7330831-eaeb-4338-855a-3e356d92cf04" /> <img width="315" height="90" alt="image" src="https://github.com/user-attachments/assets/11a6840d-da75-4646-bb89-699b8c9d3c39" />
+
+<img width="250" height="277" alt="image" src="https://github.com/user-attachments/assets/f98c54cf-4baa-417a-9f30-29c3c6520c58" />
+
+Med denne løsningen blir dette en «quick fix» for kunne sette opp mappen lettere som en snarvei. Det er mulig å sette begrensinger sånn det er bare users på serveren som har tilgang til spesifikke mapper, mens admin har styring hvem som har tilgang til hva. Ved denne «quick fix» løsningen kan det være fare for om klient pc-en blir utsatt for virus. kan det forutsake fri tilgang til å kryptere og slette alt på serveren gjennom den delte mappen. Jeg skal kommer mer inn på dette med active directory i neste oppgave. 
