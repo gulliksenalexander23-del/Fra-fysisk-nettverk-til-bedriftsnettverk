@@ -60,6 +60,36 @@ Port : 445 State : open Service : Microsoft-ds
 
 en port (State: open) er åpen betyr at den kjører en tjeneste eller et program på serveren som aktivt lytter på denne porten, og som er klar til å motta tilkoblinger fra andre enheter på nettverket. Om porten hadde været (State: closed) så ville port vært lukket, som er at det er ingen tjeneste som lytter der og trafikken blir avvist. 
 
+# Steg 7 – Wireshark
+Åpner Wireshark med å starte fangsten ved å sende ping 192.168.1.10 på klient pc-en. Deretter filtrer vi i søkefeltet etter ICMP for å finne requst og replay og kilder og mål. 
+Her ser vi at klienten sendere request og så får serveren replay. Kilden blir 192.168.1.100 og mål blir 192.168.1.10
+
+<img width="945" height="113" alt="image" src="https://github.com/user-attachments/assets/c7ef8122-898b-423d-9fc4-e47c29d9dc06" />
+
+Gjennom å sjekke i wireshark på den delte felles mappen så får jeg opp ipv6 i resultatet mitt. Dette skylles at nettverket på server pc-en ikke har blitt endret til ipv4 sånn at wireshark klarer ikke å lese av ipv4 på søket TCP. Om dette skulle blitt endret til ipv4 så måtte man starte serveren på nytt via å ta av ipv6 på serveren.
+
+<img width="945" height="243" alt="image" src="https://github.com/user-attachments/assets/99d2892d-95eb-4edf-afac-e62d8081d1df" />
+Nmap sender forespørsler til en rekke port er for å kartlegge hva som finnes på maskinen. Svaret viser klienten hvilke port er og tjenester som er åpne og klare til bruker. Dette sier noe om systemets tilgjengelige tjenester på et gitt tidspunkt.
+
+Port 53 ( domain / DNS): Navneoppslagstjeneste som oversetter domenenavn (f.eks. domene.local) til IP-adresser, og hjelper klienter med å finne servere i nettverket.
+
+Port 80 ( http ): Ukryptert web-trafikk, brukes til å betjene vanlige nettsider eller webbaserte administrasjonsgrensesnitt.
+
+Port 88 ( kerberos-sec ): Sikker autentiseringsprotokoll i Windows Active Directory. Håndterer billettbasert innlogging og identitetsverifisering for brukere og maskiner.
+
+Port 135 ( msrpc ): Microsoft RPC (Remote Procedure Call) Endpoint Mapper. Hjelper klienter med å oppdage hvilke dynamiske porter andre Windows-tjenester lytter på.
+
+Port 139 ( netbios-ssn ): NetBIOS Session Service, en eldre Windows-protokoll for fildeling, skriveutskrift og nettverkskommunikasjon.
+
+Port 389 ( ldap ): Lightweight Directory Access Protocol. Brukes til å søke i og oppdatere oppføringer i Active Directory-databasen (som brukerkontoer, grupper og tilganger).
+
+Port 443 ( https ): Kryptert web-trafikk (TLS/SSL) for sikker kommunikasjon mot nettsider eller web-tjenester.
+
+Port 445 ( microsoft-ds / SMB): Server Message Block over IP. Brukes til direkte fildeling, tilgang til nettverksskrivere og overføring av Group Policy (GPO) til Windows-klienter.
+
+Port 3389 ( ms-wbt-server / RDP): Remote Desktop Protocol. Gjør det mulig for administratorer å koble seg til maskinen via et grafisk fjernskrivebord.
+
+Wireshark viser trafikken som flyter i øyeblikket. (ping fra pakker eller flyten mellom delte mapper når man åpner de) dette gjelder også for kommunikasjonen mellom enhetene.
 
 
 
