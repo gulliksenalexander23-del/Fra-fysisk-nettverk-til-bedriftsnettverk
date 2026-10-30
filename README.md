@@ -91,6 +91,193 @@ Port 3389 ( ms-wbt-server / RDP): Remote Desktop Protocol. Gjør det mulig for a
 
 Wireshark viser trafikken som flyter i øyeblikket. (ping fra pakker eller flyten mellom delte mapper når man åpner de) dette gjelder også for kommunikasjonen mellom enhetene.
 
+# Del 2 - Krav til Packet Tracer-løsningen
+
+## Steg 1 – bygg og test LAN-ene
+### Plassering av enheter 
+Startet med å ta 2 stykk 2911-rutere for ruter 8 og ruter 9. 4 stykk 2960-24-switcher for salg,support,admin og server. tre-klient-PC-er for (PC salg, PC support og PC admin) og en sentral server (server). På ruter 8 kobler vi til salg-switchen og support-switchen med Copper Straight-Through kabler mot port gig0/0 og gig0/1. på ruter 9 kobler vi til admin-switchen og server-switchen med Copper Straight-Through kabler mot port gig0/0 og gig0/1. Deretter kobler vi sammen ruter 8 og ruter 9 forbindelesen med å kable en Copper Cross-Over kabel direkte fra en ledig port på ruter 8 til en ledig port på ruter 9 (gig0/2).
+
+### Konfigurasjon av Ruter-grensesnitt (CLI)
+For å etablere Default Gateway for hvert subnett og aktivere portene, ble følgende gjennomført i CLI.
+
+**Ruter 8**
+
+**Salg-LAN (192.168.40.0)**
+
+Router> enable 
+
+Router# configure terminal 
+
+Router(config)# interface GigabitEthernet0/0
+
+Router(config-if)# ip address 192.168.40.1 255.255.255.0 
+
+Router(config-if)# no shutdown 
+
+Router(config-if)# exit
+
+**Support-LAN (192.168.20.0)**
+
+Router> enable 
+
+Router# configure terminal 
+
+Router(config)# interface GigabitEthernet0/1
+
+Router(config-if)# ip address 192.168.20.1 255.255.255.0
+
+Router(config-if)# no shutdown 
+
+Router(config-if)# exit
+
+**Linje mot Ruter 9 (10.0.0.0/30)**
+
+Router> enable 
+
+Router# configure terminal 
+
+Router(config)# interface GigabitEthernet0/0/2 
+
+Router(config-if)# ip address 10.0.0.1 255.255.255.252 
+
+Router(config-if)# no shutdown
+
+<img width="917" height="150" alt="image" src="https://github.com/user-attachments/assets/bc6b326c-bfc9-4dec-aad8-b78520e50c61" />
+
+**Ruter 9**
+
+**Admin-LAN (192.168.10.0)**
+
+Router> enable 
+
+Router# configure terminal
+
+Router(config)# interface GigabitEthernet0/0
+
+Router(config-if)# ip address 192.168.10.1 255.255.255.0
+
+Router(config-if)# no shutdown 
+
+Router(config-if)# exit 
+
+**Server-LAN (192.168.30.0)**
+
+Router> enable 
+
+Router# configure terminal
+
+Router(config)# interface GigabitEthernet0/1 
+
+Router(config-if)# ip address 192.168.30.1 255.255.255.0 
+
+Router(config-if)# no shutdown 
+
+Router(config-if)# exit
+
+**Linje mot Router 8 (10.0.0.0/30)**
+
+Router> enable 
+
+Router# configure terminal
+
+Router(config)# interface GigabitEthernet0/2 
+
+Router(config-if)# ip address 10.0.0.2 255.255.255.252 
+
+Router(config-if)# no shutdown
+
+<img width="945" height="132" alt="image" src="https://github.com/user-attachments/assets/3c53ba0b-5b20-492d-b6c1-1ab11ad688f3" />
+
+## Steg 2 – routing mellom nettene 
+
+For at trafikk skal flyte på tvers av ruter 8 og ruter 9, må ruterne få vite hvor pakkene skal sendes. 
+
+**Statisk Ruting**
+
+**På ruter 8 i CLI**
+
+Router> enable
+
+Router# configure terminal 
+
+Router(config)# ip route 192.168.10.0 255.255.255.0 10.0.0.2 
+
+Router(config)# ip route 192.168.30.0 255.255.255.0 10.0.0.2
+
+Router# end
+
+<img width="945" height="528" alt="image" src="https://github.com/user-attachments/assets/7ce63ee0-b10c-413c-8756-f9a70e5b0e82" />
+
+**På Ruter 9 i CLI**
+
+Router> enable
+
+Router# configure terminal 
+
+Router(config)# ip route 192.168.20.0 255.255.255.0 10.0.0.1
+
+Router(config)# ip route 192.168.40.0 255.255.255.0 10.0.0.1
+
+Router# end
+
+<img width="719" height="366" alt="image" src="https://github.com/user-attachments/assets/5ff3c062-ee5a-49e0-bad5-db2936801aeb" />
+
+For å sjekke om den statiske IP-adressen er satt velger jeg å sende tracert mellom admin og salg. Først må vi vite hva ip-adressen til salg er før vi sender ut trafikken. I desktop på PC salg går vi innpå command promt og skriver ipconfig, da finner vi ut av at  IP-en på PC salg er 192.168.40.21.
+
+<img width="739" height="449" alt="image" src="https://github.com/user-attachments/assets/febf4ae6-2eae-4d5a-a7b1-b0e5190a2b73" />
+
+Detter åpner vi command promt på desktop for PC admin og skriver inn tracert 192.168.40.21.
+
+<img width="928" height="280" alt="image" src="https://github.com/user-attachments/assets/b29bf43f-90a4-45c9-9574-5af0eab3dd5c" />
+
+##Steg 3 – DHCP, DNS og http
+Fast IP-adresse på Server0
+Går inn på Server0 til Desktop så på IP Configuration og velg Static:
+•	IP Address: 192.168.30.10
+•	Subnet Mask: 255.255.255.0
+•	Default Gateway: 192.168.30.1
+•	DNS Server: 192.168.30.10 (Serveren peker på seg selv for sine egne navneoppslag)
+
+ <img width="945" height="336" alt="image" src="https://github.com/user-attachments/assets/3891e27f-c08c-4af1-8f18-b9f398dfcb1d" />
+
+2. Aktiver og konfigurer HTTP (Webserver)
+1.	Klikk på Server0 og går til Services også HTTP.
+2.	Sørg for at både HTTP og HTTPS står satt til On.
+3.	(Valgfritt) Klikk på edit ved siden av index.html for å tilpasse nettsiden (f.eks. endre overskriften til <h1>Velkommen til Fjordtek Intranett!</h1>). Trykk Save.
+ 
+<img width="945" height="540" alt="image" src="https://github.com/user-attachments/assets/b04021a8-1a0b-460b-91cb-1915caa3dfec" />
+
+3. Aktiver og konfigurer DNS (Navnetjeneste)
+1.	Klikk på Server0 så til Services også DNS.
+2.	Sett DNS Service til On.
+3.	Opprett A Record under Resource Records:
+o	Name: intranett.fjordtek.local
+o	Type: A Record
+o	Address: 192.168.30.10
+4.	Klikk Add.
+
+<img width="945" height="479" alt="image" src="https://github.com/user-attachments/assets/104c0de5-9b0d-4569-ae2b-24f63e08c342" />
+
+4. Konfigurer DHCP for klientnettene
+Siden vi bruker en ruter (Router) som DHCP-server:
+Åpne CLI på ruterene og kjør kommandoer
+Opprett DHCP-pooler på Server0:
+•	Salg-Pool (192.168.40.0)
+
+<img width="575" height="498" alt="image" src="https://github.com/user-attachments/assets/b652d848-2714-4eb0-97fe-d8818f283c9a" />
+Her har det blitt feil skrevet. Ip dhcp pool slag skal hete (salg)
+
+•	Support-Pool (192.168.20.0)
+<img width="945" height="1302" alt="image" src="https://github.com/user-attachments/assets/d30130ed-4f7d-4bea-a052-98d1908c901c" />
+
+•	Admin-Pool (192.168.10.0)
+<img width="945" height="189" alt="image" src="https://github.com/user-attachments/assets/2c62ef7c-5241-456c-b389-6d73ab39becf" />
+
+Etter at vi lagt til dette, kan vi sjekke via command promt på en av klient-pcene med kommandoen ipconfig /all for å se at klientens side er bekreftet og at den har mottatt alt fra DHCP-serveren.
+
+<img width="945" height="556" alt="image" src="https://github.com/user-attachments/assets/0909d000-380c-460d-8ebd-0724a7005efd" />
+
+
 
 
 
